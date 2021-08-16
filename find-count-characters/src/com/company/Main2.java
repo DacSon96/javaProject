@@ -2,12 +2,12 @@ package com.company;
 
 public class Main2 {
     public static void main(String[] args) {
-        int[] a = {1,2,3,4,5,6,7,8,9},
+            int a = 100;
+            m(a);
+            System.out.println(a);
+        }
 
-                b = new int[3];
-
-        a[9] = b[0];
-
-        System.out.println(a[9]);
+        static void m(int x) {
+            x = 200;
+        }
     }
-}
