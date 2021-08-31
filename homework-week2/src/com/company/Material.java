@@ -3,7 +3,7 @@ package com.company;
 import java.time.LocalDate;
 
 public abstract class Material implements Discount{
-    private int id=0;
+    private String id;
     private String name;
     private LocalDate manufacturingDate;
     private int cost;
@@ -11,13 +11,14 @@ public abstract class Material implements Discount{
     public Material() {
     }
 
-    public Material(LocalDate manufacturingDate, int cost) {
+    public Material(String id, String name, LocalDate manufacturingDate, int cost) {
+        this.id = id;
+        this.name = name;
         this.manufacturingDate = manufacturingDate;
         this.cost = cost;
-        id++;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -33,7 +34,7 @@ public abstract class Material implements Discount{
         return cost;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,0 +1,10 @@
+Xây dựng ứng dụng quản lý danh sách học viên.
+ Trong đó mỗi sinh viên có thông tin bao gồm: mã sinh viên, họ tên, quê quán, lớp, điểm.
+ Yêu cầu xây dựng chương trình quản lý như sau:
+ -  Xem danh sách toàn bộ sinh viên
+ - Thêm thông tin một sinh viên
+ - Cập nhật thông tin một sinh viên
+ - Xóa thông tin một sinh viên
+ - Tìm kiếm những sinh viên có điểm cao nhất
+ - Tìm kiếm thông tin của một sinh viên theo mã sinh viên (sử dụngtìm kiếm nhị phân)
+ - Thoát

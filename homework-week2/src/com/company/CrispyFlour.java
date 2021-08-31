@@ -3,13 +3,15 @@ package com.company;
 import java.time.LocalDate;
 
 public class CrispyFlour extends Material {
-    private double quantity = 1.0;
+    private double quantity;
 
-    public CrispyFlour(LocalDate manufacturingDate, int cost, double quantity) {
-        super(manufacturingDate, cost);
-        super.setName("crispyFlour");
+        public CrispyFlour(double quantity) {
         this.quantity = quantity;
-        this.setId(super.getId());
+    }
+
+    public CrispyFlour(String id, String name, LocalDate manufacturingDate, int cost, double quantity) {
+        super(id, name, manufacturingDate, cost);
+        this.quantity = quantity;
     }
 
     public double getQuantity() {
@@ -32,17 +34,10 @@ public class CrispyFlour extends Material {
 
     @Override
     public double getRealMoney() {
-        int getMonth=this.getExpiryDate().getMonthValue();
-        if (this.getExpiryDate().getYear()>LocalDate.now().getYear()){
-            getMonth =this.getExpiryDate().getMonthValue()+12;
-        }
-        int dayToExpiry = getMonth - LocalDate.now().getMonthValue();
-        if ((dayToExpiry <= 4) && (dayToExpiry > 2)) {
+        if (getExpiryDate().isAfter(LocalDate.now().plusMonths(2))) {
             return this.getAmount() - this.getAmount() * 0.2;
-        } else if ((dayToExpiry <= 3) && (dayToExpiry >= 0)) {
+        } else if (getExpiryDate().isAfter(LocalDate.now().plusMonths(4))) {
             return this.getAmount() - this.getAmount() * 0.4;
-        } else if (dayToExpiry < 0) {
-            return -1;
         } else
             return this.getAmount() - this.getAmount() * 0.05;
     }
