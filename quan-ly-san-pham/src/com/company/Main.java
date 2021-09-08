@@ -1,6 +1,7 @@
 package com.company;
 
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -9,82 +10,98 @@ public class Main {
     public static void main(String[] args) throws IOException {
         // write your code here
         ProductManager products = new ProductManager();
-        int choise;
+        int choise=0;
         do {
             Menu();
-            System.out.println("Chọn chức năng: ");
-            choise = scanner.nextInt();
-            scanner.nextLine();
-            switch (choise) {
-                case 1: {
-                    System.out.println("--Xem danh sách--");
-                    products.showAll();
-                    break;
-                }
-                case 2: {
-                    addProduct(products);
-                    break;
-                }
-                case 3: {
-                    updateProduct(products);
-                    break;
-                }
-                case 4: {
-                    removeProduct(products);
-                    break;
-                }
-                case 5: {
-                    sortProduct(products);
-                    break;
-                }
-                case 6: {
-                    findMaxProduct(products);
-                    break;
-                }
-                case 7: {
-                    getProductFromFile();
-
-                }
-                case 8: {
-                    writeToFile(products);
-                }
+            try {
+                System.out.println("Chọn chức năng: ");
+                choise = scanner.nextInt();
+                scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.err.println("Nhập sai lựa chon");
             }
-        } while (choise != 0);
+                switch (choise) {
+                    case 1: {
+                        System.out.println("--Xem danh sách--");
+                        products.showAll();
+                        break;
+                    }
+                    case 2: {
+                        addProduct(products);
+                        break;
+                    }
+                    case 3: {
+                        updateProduct(products);
+                        break;
+                    }
+                    case 4: {
+                        removeProduct(products);
+                        break;
+                    }
+                    case 5: {
+                        sortProduct(products);
+                        break;
+                    }
+                    case 6: {
+                        findMaxProduct(products);
+                        break;
+                    }
+                    case 7: {
+                        products = getProductFromFile();
+                        break;
+
+                    }
+                    case 8: {
+                        writeProductToFile(products);
+                        break;
+                    }
+                    default: {
+                        System.err.println("Nhập sai lựa chọn");
+                    }
+                }
+
+        } while (choise != 9);
     }
 
+
     private static ProductManager getProductFromFile() throws IOException {
+        ProductManager products;
+        System.out.println("--Đọc từ file--");
+        System.out.println("Nhập đường dẫn file");
+        String part = scanner.nextLine();
+        products = readFromFile(part);
+        return products;
+    }
+
+    private static ProductManager readFromFile(String part) {
         ProductManager products = new ProductManager();
         try {
-            System.out.println("--Đọc từ file--");
-            System.out.println("Nhập đường dẫn file");
-            String part = scanner.nextLine();
             FileInputStream fis = new FileInputStream(part);
             ObjectInputStream ois = new ObjectInputStream(fis);
             products = (ProductManager) ois.readObject();
-            fis.close();
             ois.close();
-        } catch (ClassNotFoundException e) {
-            System.err.println("Sai đường dẫn");
-            ;
+            fis.close();
+        } catch (Exception e) {
+            System.err.println("Lỗi đường dẫn");
         }
         return products;
     }
 
-    private static void writeToFile(ProductManager products) {
+    private static void writeProductToFile(ProductManager products) {
         System.out.println("--Ghi ra file--");
-//        System.out.println("Nhập đường dẫn file");
-//        String part = scanner.nextLine();
-        writeFile(products, "product.txt");
+        System.out.println("Nhập đường dẫn file");
+        String part = scanner.nextLine();
+        writeToFile(products, part);
     }
 
-    private static void writeFile(ProductManager products, String part) {
+    private static void writeToFile(ProductManager products, String part) {
         try {
             FileOutputStream fos = new FileOutputStream(part);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(products);
             oos.close();
             fos.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.println("Sai đường dẫn");
         }
     }

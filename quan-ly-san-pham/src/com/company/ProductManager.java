@@ -2,13 +2,10 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class ProductManager {
+public class ProductManager implements Serializable{
     List<Product> productList = new ArrayList<>();
-
-    public ProductManager() {
-    }
-
     public void addProduct(Product product) {
         productList.add(product);
     }
