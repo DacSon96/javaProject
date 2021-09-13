@@ -37,30 +37,15 @@ public class Main {
                     break;
                 }
                 case 5: {
-                    System.out.println("Tìm kiếm thông tin liên hệ");
-                    int choiceSearch;
-                    do {
-                        System.out.println("Nhập cách tìm kiếm");
-                        System.out.println("1.Tìm qua số điện thoại");
-                        System.out.println("2.Tìm qua tên");
-                        System.out.println("0.Quay lại");
-                        System.out.println("Nhập lựa chọn: ");
-                        choiceSearch=scanner.nextInt();
-                        scanner.nextLine();
-                        if (choice==1) {
-                            System.out.println("Nhập số điện thoại cần tìm kiếm");
-                            String phoneNumber = scanner.nextLine();
-                            phoneBook.findContractByPhoneNumber(phoneNumber);
-                        } else if (choice==2) {
-                            System.out.println("Nhập tên cần tìm kiếm");
-                            String name = scanner.nextLine();
-                            phoneBook.findByName(name);
-                        }
-                    }while (choiceSearch!=0);
+                    findByNamePhone(phoneBook, choice);
                     break;
                 }
                 case 6: {
-                    phoneBook = getPhoneBookFromFile();
+                    if (getPhoneBookFromFile().equals(null)){
+                        System.err.println("File không có dữ liệu");;
+                    } else {
+                        phoneBook = getPhoneBookFromFile();
+                    }
                     break;
                 }
                 case 7: {
@@ -70,6 +55,29 @@ public class Main {
             }
         } while (choice != 8);
 
+    }
+
+    private static void findByNamePhone(PhoneBookManagement phoneBook, int choice) {
+        System.out.println("Tìm kiếm thông tin liên hệ");
+        int choiceSearch;
+        do {
+            System.out.println("Nhập cách tìm kiếm");
+            System.out.println("1.Tìm qua số điện thoại");
+            System.out.println("2.Tìm qua tên");
+            System.out.println("0.Quay lại");
+            System.out.println("Nhập lựa chọn: ");
+            choiceSearch=scanner.nextInt();
+            scanner.nextLine();
+            if (choice ==1) {
+                System.out.println("Nhập số điện thoại cần tìm kiếm");
+                String phoneNumber = scanner.nextLine();
+                phoneBook.findContractByPhoneNumber(phoneNumber);
+            } else if (choice ==2) {
+                System.out.println("Nhập tên cần tìm kiếm");
+                String name = scanner.nextLine();
+                phoneBook.findByName(name);
+            }
+        }while (choiceSearch!=0);
     }
 
     private static void removeContract(PhoneBookManagement phoneBook) {
@@ -160,13 +168,19 @@ public class Main {
 
     private static PhoneBookManagement getPhoneBookFromFile() {
         PhoneBookManagement phoneBook;
+        String choice;
         System.out.println("--Đọc từ file--");
         System.err.println("Lấy dự liệu sẽ làm mất dữ liệu danh bạ vừa nhập");
-        System.out.println("Nhập đường dẫn file");
-        String part = scanner.nextLine();
-        phoneBook = readFromFile(part);
-        return phoneBook;
-
+        System.out.println("Nhập yes/no để tiếp tục/quay lại:");
+        choice = scanner.nextLine();
+        if (choice.equals("yes")) {
+            System.out.println("Nhập đường dẫn file");
+            String part = scanner.nextLine();
+            phoneBook = readFromFile(part);
+            return phoneBook;
+        }else
+            System.out.println("Quay lại ........");
+        return null;
     }
 
     private static PhoneBookManagement readFromFile(String part) {
