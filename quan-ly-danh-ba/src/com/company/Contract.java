@@ -1,18 +1,22 @@
 package com.company;
 
-public class PhoneBook {
+import java.io.Serializable;
+
+public class Contract implements Serializable {
     private String phoneNumber;
     private String group;
     private String name;
     private String sex;
     private String address;
+    private String email;
 
-    public PhoneBook(String phoneNumber, String group, String name, String sex, String address) {
+    public Contract(String phoneNumber, String group, String name, String sex, String address,String email) {
         this.phoneNumber = phoneNumber;
         this.group = group;
         this.name = name;
         this.sex = sex;
         this.address = address;
+        this.email = email;
     }
 
     public String getPhoneNumber() {
@@ -57,12 +61,13 @@ public class PhoneBook {
 
     @Override
     public String toString() {
-        return "PhoneBook{" +
+        return "Contract{" +
                 "phoneNumber='" + phoneNumber + '\'' +
                 ", group='" + group + '\'' +
                 ", name='" + name + '\'' +
                 ", sex='" + sex + '\'' +
                 ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }
