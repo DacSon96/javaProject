@@ -41,7 +41,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Create</button>
-        <button class="btn btn-secondary mt-3"><a href="/student/student.jsp"></a>Back</button>
+        <button class="btn btn-secondary mt-3"><a href="/student"></a>Back</button>
     </form>
 
 </div>

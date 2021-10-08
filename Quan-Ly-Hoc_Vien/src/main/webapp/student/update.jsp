@@ -33,34 +33,38 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post" >
+                    <form action="/student?action=update" method="post">
+                        <div class="mb-3">
+                            <label for="id" class="form-label">Student Id</label>
+                            <input type="text" name="id" class="form-control" id="id" value="${student.id}">
+                        </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">Student Name</label>
-                            <input type="text" name="name" class="form-control" id="name" value="${student.name}">
+                            <input type="text" name="name" class="form-control" id="name">
                         </div>
                         <div class="mb-3">
                             <label for="birth" class="form-label">Day of Birth</label>
-                            <input type="text" name="birth" class="form-control" id="birth" value="${student.birth}">
+                            <input type="text" name="birth" class="form-control" id="birth">
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
-                            <input type="text" name="address" class="form-control" id="address" value="${student.address}">
+                            <input type="text" name="address" class="form-control" id="address">
                         </div>
                         <div class="mb-3">
                             <label for="phoneNumber" class="form-label">PhoneNumber</label>
-                            <input type="text" name="phoneNumber" class="form-control" id="phoneNumber" value="${student.color}">
+                            <input type="text" name="phoneNumber" class="form-control" id="phoneNumber">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" name="email" class="form-control" id="email" value="${student.email}">
+                            <input type="text" name="email" class="form-control" id="email">
                         </div>
                         <div class="mb-3">
                             <label for="classRoomId" class="form-label">ClassRoomId</label>
-                            <input type="text" name="classRoomId" class="form-control" id="classRoomId" value="${student.classRoomId}">
+                            <input type="text" name="classRoomId" class="form-control" id="classRoomId">
                         </div>
 
                         <button type="submit" class="btn btn-primary mt-3">Edit</button>
-                        <button class="btn btn-secondary mt-3"><a href="/student/student.jsp"></a>Back</button>
+                        <button class="btn btn-secondary mt-3"><a href="/student"></a>Back</button>
                     </form>
                 </div>
                 <div class="card-footer">

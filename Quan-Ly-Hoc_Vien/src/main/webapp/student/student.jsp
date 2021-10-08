@@ -17,7 +17,7 @@
 </head>
 <body>
 <div>
-    <div class="col-10">
+    <div class="col-12">
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -50,8 +50,8 @@
             <th scope="col" class="col-1">Name</th>
             <th scope="col" class="col-2">Date of Birth</th>
             <th scope="col" class="col-4">Email</th>
-            <th scope="col" class="col-3">Address</th>
-            <th scope="col" class="col-1">Action</th>
+            <th scope="col" class="col-2">Address</th>
+            <th scope="col" class="col-2">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -63,7 +63,7 @@
             <td>${student.email}</td>
             <td>@${student.address}</td>
             <td><button type="button" class="btn btn-warning" ><a style="color: black" href="/student?action=update&id=${student.id}">Edit</a></button>
-                <button type="button" class="btn btn-danger"><a style="color: white;" href="/student?action=delete&id=${student.id}">Delete</a></button></td>
+                <button type="button" class="btn btn-danger"><a style="color: white" href="/student?action=delete&id=${student.id}">Delete</a></button></td>
             </td>
         </tr>
         </c:forEach>

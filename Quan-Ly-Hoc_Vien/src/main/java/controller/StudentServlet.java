@@ -51,21 +51,16 @@ public class StudentServlet extends HttpServlet {
         }
     }
 
-    private void updateStudentForm(HttpServletRequest request, HttpServletResponse response) {
+    private int updateStudentForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         int id = Integer.parseInt(request.getParameter("id"));
         Student student = studentService.findById(id);
         request.setAttribute("student", student);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/student/update.jsp");
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        dispatcher.forward(request, response);
+        return id;
     }
 
-    private void addStudent(HttpServletRequest request, HttpServletResponse response) {
+    private void addStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String birth = request.getParameter("birth");
         String address = request.getParameter("address");
@@ -74,14 +69,8 @@ public class StudentServlet extends HttpServlet {
         int classRoomId = Integer.parseInt(request.getParameter("classRoomId"));
         Student newStudent = new Student(name, birth, address, phoneNumber, email, classRoomId);
         studentService.create(newStudent);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("student/student.jsp");
-        try {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
             dispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
     private void removeStudent(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -105,8 +94,8 @@ public class StudentServlet extends HttpServlet {
                 addStudent(request,response);
                 break;
             }
-            case "edit": {
-                updateStudentForm(request,response);
+            case "update": {
+                updateStudent(request,response);
                 break;
             }
             default: {
@@ -117,7 +106,6 @@ public class StudentServlet extends HttpServlet {
     }
 
     private void updateStudent(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String birth = request.getParameter("birth");
         String address = request.getParameter("address");
@@ -125,6 +113,7 @@ public class StudentServlet extends HttpServlet {
         String email = request.getParameter("email");
         int classRoomId = Integer.parseInt(request.getParameter("classRoomId"));
         Student student = new Student(name,birth,address,phoneNumber,email,classRoomId);
+        int id = Integer.parseInt(request.getParameter("id"));
         studentService.update(id, student);
         try {
             response.sendRedirect("/student");
